@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="service_agreement_agreed" label="Service Agreement Agreed" language="en" table="x_sl_application">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>service_agreement_agreed</element>
+            <help/>
+            <hint/>
+            <label>Service Agreement Agreed</label>
+            <language>en</language>
+            <name>x_sl_application</name>
+            <plural>Service Agreement Agreed</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-17 13:55:02</sys_created_on>
+            <sys_id>ba86edc3db6c830052ff76721f9619ba</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Service Agreement Agreed</sys_name>
+            <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+            <sys_update_name>sys_documentation_x_sl_application_service_agreement_agreed_en</sys_update_name>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-17 13:55:02</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

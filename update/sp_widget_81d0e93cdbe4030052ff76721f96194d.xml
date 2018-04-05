@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope, $scope) {
+  /* widget controller */
+  var c = this;
+	
+	var applySettings = function(data) {
+		$scope.isLoaded = true;
+		$scope.application = data.application;
+		
+		var actionLabel = 'Start';
+		if (data.application) {
+			actionLabel = 'Edit';
+			if (data.application.certified) {
+				actionLabel = 'Review' ;
+			} else if (data.application.disqualified) {
+				actionLabel = 'Restart';
+			}
+		}
+		$scope.actionLabel = actionLabel;
+		$scope.actionClass = 'success';
+		if (!data.application || data.application.privacy_policy_seen != 'true') {
+			$scope.href = '?id=privacy_policy';
+		} else {
+			$scope.href = '?id=slrp_application&aid=' + data.application.sys_id;
+		}
+	};
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	}
+	
+	$scope.$on('slrp_application_loaded', function(event, data) {
+		applySettings($rootScope);
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/* TOP ICON ---------- */
+
+a.top_icon {
+  display: block;
+  padding: 20px;
+  text-align: center;
+}
+
+a.top_icon .fa {
+  display: block;
+  text-align: center;
+}
+
+a.top_icon h3 {
+  font-weight: 300;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+/* CIRCLE ICON ---------- */
+
+a.circle_icon {
+  display: block;
+  padding: 20px 0px 20px 70px;
+  position: relative;
+}
+
+a.circle_icon .fa {
+  position:absolute;
+  left: 0px;
+  top: 10px;
+}
+
+a.circle_icon h3 {
+  font-weight: 300;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+/* COLOR BOX ---------- */
+
+a.color_box {
+  display: block;
+  position: relative;
+  padding: 20px 20px 20px 82px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+a.color_box .fa {
+  position:absolute;
+  left: 20px;
+  top: 20px;
+  width:42px;
+  text-align: center;
+}
+
+a.color_box h3 {
+  font-weight: 300;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.icon-link-background-primary {
+  background-color: $brand-primary;
+}
+
+.icon-link-background-info {
+  background-color: $brand-info;
+}
+
+.icon-link-background-success {
+  background-color: $brand-success;
+}
+
+.icon-link-background-warning {
+  background-color: $brand-warning;
+}
+
+.icon-link-background-danger {
+  background-color: $brand-danger;
+}
+
+.icon-link-background-default {
+  background-color: $brand-primary;
+}</css>
+        <data_table>sp_instance_link</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list>title,short_description,glyph,class_name,type,sc_category,url,kb_article,kb_topic,kb_category,sc_cat_item,sp_page,color</field_list>
+        <has_preview>false</has_preview>
+        <id>slrp-user-application-link</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - User - Application Link</name>
+        <option_schema>[]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function(){
+	var gr = $sp.getInstanceRecord();
+	data.href = $sp.getMenuHREF(gr);
+	console.log(data.href);
+	data.target = options.target || "";
+	
+	if (input) {
+		data.os = input.os;
+		data.application = getApplication(openSeason);
+	}
+
+})();
+
+function getApplication(openSeason) {
+	var user = gs.getUser();
+	var application = new GlideRecord('x_sl_application');
+	application.addQuery('applicant', user.getID());
+	application.addQuery('openSeason', openSeason.sys_id);
+	application.query();
+	
+	return application.next() ? application : null;
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-10 13:43:44</sys_created_on>
+        <sys_id>81d0e93cdbe4030052ff76721f96194d</sys_id>
+        <sys_mod_count>93</sys_mod_count>
+        <sys_name>SLRP - User - Application Link</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_81d0e93cdbe4030052ff76721f96194d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-04 14:37:01</sys_updated_on>
+        <template><![CDATA[<div>
+  <!--// Circle Icon -->
+  <a ng-href="{{::href}}" class="circle_icon text-{{actionClass ? actionClass : 'success'}}" target="{{::data.target}}">
+    <span class="fa fa-stack fa-2x">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-edit fa-stack-1x fa-inverse"></i>
+    </span>
+    <h3>{{actionLabel}} Application</h3>
+    <span class="text-muted">Start the application process.</span>
+  </a>
+</div>]]></template>
+    </sp_widget>
+</record_update>

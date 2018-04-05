@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Answer" max_length="40" name="x_sl_answer" type="collection">
+        <element label="Application" mandatory="true" max_length="32" name="application" reference="x_sl_application" type="reference"/>
+        <element label="Data" max_length="1000" name="data" type="string"/>
+        <element label="Disqualified" max_length="40" name="disqualified" type="boolean"/>
+        <element display="true" label="Question" mandatory="true" max_length="32" name="question" reference="x_sl_question" type="reference"/>
+        <element label="Value" max_length="40" name="value" type="string"/>
+        <index name="index">
+            <element name="application"/>
+        </index>
+        <index name="index2">
+            <element name="question"/>
+        </index>
+    </element>
+</database>

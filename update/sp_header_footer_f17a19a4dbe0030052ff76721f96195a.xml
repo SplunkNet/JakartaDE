@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_header_footer">
+    <sp_header_footer action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function ($rootScope, $scope, snRecordWatcher, spUtil, $location, $uibModal, cabrillo, $timeout) {
+	var c = this;
+	$scope.userID = $scope.user.sys_id;
+	if (cabrillo.isNative())
+		$scope.isViewNative = true;
+	
+	$rootScope.openSeason = c.data.openSeason;
+	$rootScope.application = c.data.application;
+	$rootScope.gemsProfile = c.data.gemsProfile;
+	$rootScope.loaded = true;
+	
+	$rootScope.$on('application_updated', function(event, data) {
+		c.server.get({
+			action: 'application_updated'
+		}).then(function(response) {
+			$rootScope.openSeason = response.data.openSeason;
+			$rootScope.application = response.data.application;
+			$rootScope.gemsProfile = response.data.gemsProfile;
+			$rootScope.loaded = true;
+			$rootScope.$broadcast('slrp_application_loaded');
+		});
+	});
+	
+	$timeout(function() {
+		$rootScope.$broadcast('slrp_application_loaded', {
+			loaded: true,
+			openSeason: $rootScope.openSeason,
+			application: $rootScope.application,
+			gemsProfile: $rootScope.gemsProfile
+		});
+	}, 500);
+		
+	$scope.openPopUp = function() {
+		var url = "$chat_support.do?queueID=" + $scope.data.connect_support_queue_id;
+		var popup = window.open (url, "popup", "width=900, height=600"); 
+	};
+
+	$scope.openLogin = function () {
+		$scope.modalInstance = $uibModal.open({
+			templateUrl: 'slrpModalLogin',
+			scope: $scope
+		});
+	};
+
+	$rootScope.$on('sp.avatar_changed', function() {
+		$scope.userID = "";
+		$timeout(function(){
+			$scope.userID = $scope.user.sys_id;
+		});
+	});
+
+	$scope.isHomepage = function() {
+		if (!$scope.page.id)
+			return true;
+
+		if ($scope.page.id == $scope.portal.homepage_dv)
+			return true;
+
+		return false;
+	};
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.navbar {
+  transition: 250ms opacity ease-in-out; 
+  -webkit-transition: 250ms opacity ease-in-out; 
+  border: 0;
+  border-bottom: 4px solid $sp-navbar-divider-color;
+}
+
+.navbar-fade {
+  opacity: 0.4;
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav &gt; li &gt; a {
+  max-height: 50px;
+}
+
+.navbar-brand {
+  height: 50px;
+  padding: 0;
+}
+
+.navbar-brand img, .navbar-brand span {
+  margin-left: $sp-logo-margin-x;
+  margin-right: $sp-logo-margin-x;
+  margin-top: $sp-logo-margin-y;
+  margin-bottom: $sp-logo-margin-y;
+  display: block;
+  max-height: $sp-logo-max-height;
+  max-width: $sp-logo-max-width;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.navbar-brand span {
+	max-width: 300px;
+}
+
+.breadcrumb-container {
+  background-color: $panel-bg;
+}
+
+/* for mobile app */
+.navbar-inverse.is-native {
+  background-color: #405060;
+}
+
+nav{
+ margin-bottom: 0px;
+ border-radius: 0px; 
+}
+
+.navbar-collapse{
+padding-right: 0px;
+}
+
+.navbar-nav {
+margin: 0px;
+}
+
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function(scope, element) {	
+	$(element).on('click.nav','.navbar-collapse.in',function(e) {	
+		var target = $(e.target);
+		if (target.is('a')) {
+			// collapse mobile nav if clicked an anchor
+			$(this).removeClass('in').addClass('collapse');
+			return;
+		}
+		
+		// if neither target nor parent is an anchor, do nothing
+		if (!target.parent().is('a'))
+			return;
+		
+		// collapse mobile nav if target is part of a submenu
+		if (target.parents("ul.dropdown-menu").length > 0)
+			$(this).removeClass('in').addClass('collapse');
+	});
+}]]></link>
+        <name>SLRP Header</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	//load open season
+	var openSeason = getOpenSeason();
+	if (openSeason) {
+		data.openSeason = {
+			sys_id: openSeason.getValue("sys_id"),
+			year: Number(openSeason.year),
+			active: openSeason.getValue('active'),
+			status: openSeason.getValue('status'),
+			min_loan_balance: Number(openSeason.getValue('min_loan_balance')),
+			max_yearly_payment: Number(openSeason.getValue('max_yearly_payment')),
+			max_lifetime_payment: Number(openSeason.getValue('max_lifetime_payment')),
+			post_qualification: openSeason.getValue('postQualification')
+			
+		};
+
+		//load application if there is an open season
+		loadApplication(data.openSeason);
+	}
+	
+	//load GEMS profile
+	var gemsProfile = getGEMSProfile();
+	if (gemsProfile) {
+		var fieldNames = 'name,employee_number,ssn,u_tempssn,u_tenure_code,u_bureau_ref,' + 
+				'employment_status,u_service_type_code';
+		data.gemsProfile = {
+			name: "Name", //gemsProfile.name.toString(),
+			employee_number: "Employee Number", //gemsProfile.employee_number.toString(),
+			service_type: " CS", //gemsProfile.u_service_type_code == 'C' ? 'CS' : 'FS',
+			tenure: "Tenure Code", // gemsProfile.u_tenure_code.toString(),
+			employment_status: "A" // gemsProfile.employment_status.toString()
+		};
+	}
+})();
+
+function loadApplication(openSeason) {
+	console.log('Loading application for ' + openSeason.year);
+	var application = getApplication(openSeason);
+	if (application) {
+		var appFields = 'sys_id,status,current_question,privacy_policy_seen,contact_information_confirmed,status_updated_on,sys_updated_on,alternate_email_addresses';
+		data.application = { current_question: {}};
+		$sp.getRecordValues(data.application, application, appFields);
+
+		data.application.certified = application.getDisplayValue('certified') == 'true';
+		data.application.open_season = openSeason;
+
+		//data.application = application;
+		
+		if (application.current_question) {
+			data.application.current_question = {
+				number: Number(application.current_question.number)
+			}
+		}
+	}
+}
+
+function getApplication(openSeason) {
+	var application = new GlideRecord('x_sl_application');
+	application.addQuery('applicant', gs.getUserID());
+	application.addQuery('open_season', openSeason.sys_id);
+	application.query();
+	
+	return application.next() ? application : null;
+}
+
+function getOpenSeason() {
+	var os = new GlideRecord('x_sl_open_season');
+	os.addQuery('active', true);
+	os.addQuery('status', 'Open');
+	os.query();
+	
+	return os.next() ? os : null;
+}
+
+function getGEMSProfile() {
+	var gp = gs.getUserName();
+	
+	return gp ? gp : null;
+}
+
+// Defines the support queue ID that will be linked to by the Live Chat link in header
+data.connect_support_queue_id = $sp.getValue('sp_chat_queue');
+data.login_page = $sp.getValue('login_page');
+var menu = $sp.getValue("sp_rectangle_menu");
+data.menu = $sp.getWidgetFromInstance(menu);
+if (data.menu && data.menu.data) {
+	data.menu.data.replace = true;
+	// Hide login if menu already has link to login
+	data.hasLogin = false;
+	if (data.menu.data.menu.items) {
+		for(var i in data.menu.data.menu.items) {
+			var item = data.menu.data.menu.items[i];
+			if (item.type == 'page' && item.sp_page == data.login_page)
+				data.hasLogin = true;
+		}
+	}
+}
+
+data.loginWidget = $sp.getWidgetFromInstance('slrp-login-modal');
+data.typeahead = $sp.getWidgetFromInstance('typeahead-search');
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_header_footer</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-09 18:37:26</sys_created_on>
+        <sys_id>f17a19a4dbe0030052ff76721f96195a</sys_id>
+        <sys_mod_count>209</sys_mod_count>
+        <sys_name>SLRP Header</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_header_footer_f17a19a4dbe0030052ff76721f96195a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-04 15:24:30</sys_updated_on>
+        <template><![CDATA[<div>
+  <nav class="navbar-inverse" ng-class="::{'navbar':!isViewNative, 'is-native': isViewNative}"
+       role="navigation">
+    <div ng-show="::!isViewNative" class="navbar-header">
+      <a class="navbar-brand navbar-brand-logo" ng-if="::portal.logo" href="?id={{::portal.homepage_dv}}">
+        <img ng-src="{{::portal.logo}}" />
+      </a>
+      <a class="navbar-brand" href="?id={{::portal.homepage_dv}}"><span>{{::portal.title}}</span></a>
+
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sp-nav-bar">
+        <span class="sr-only">${Toggle navigation}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div sp-navbar-toggle="" class="collapse navbar-collapse navbar-right" id="sp-nav-bar">
+      <!-- Include The Menu -->
+      <sp-widget widget="data.menu"></sp-widget>
+      <ul ng-if="::(!user.logged_in && page.id != portal.login_page_dv && !data.hasLogin)" class="nav navbar-nav">
+        <li><a href ng-click="openLogin()">${Login}</a></li>
+      </ul>
+      <ul ng-if="::user.logged_in" class="nav navbar-nav">
+        <!-- chat, avatar, and logout -->
+        <li ng-if="::data.connect_support_queue_id"><a href ng-click="openPopUp()">${Live Chat}</a></li>
+        <li class="dropdown hidden-xs">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="navbar-avatar"><sn-avatar class="avatar-small-medium" primary="userID" /></span>
+            <span class="visible-lg-inline">{{::user.name}}</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a ng-href="?id=user_profile&sys_id={{::user.sys_id}}">${Profile}</a></li>
+            <li><a href="{{::portal.logoutUrl}}">${Logout}</a></li>
+          </ul>
+        </li>
+        <li class="visible-xs-block"><a ng-href="?id=user_profile&sys_id={{::user.sys_id}}"><span class="navbar-avatar"><sn-avatar class="avatar-small-medium" primary="userID" /></span>{{::user.name}}</a></li>
+        <li class="visible-xs-block"><a href="{{::portal.logoutUrl}}">${Logout}</a></li>
+      </ul>
+    </div>
+  </nav>  
+</div>]]></template>
+    </sp_header_footer>
+</record_update>

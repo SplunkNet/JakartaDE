@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-10 16:22:25</sys_created_on>
+        <sys_id>612582f4db28030052ff76721f9619bc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_sl_application.x_sl_application_user</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_security_acl display_value="x_sl_application">252582f4db28030052ff76721f9619bb</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_612582f4db28030052ff76721f9619bc</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-10 16:22:25</sys_updated_on>
+        <sys_user_role display_value="x_sl_application_user" name="x_sl_application_user">91258a34db28030052ff76721f961984</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

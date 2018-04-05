@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope, spUtil) {
+  /* widget controller */
+  var c = this;
+	
+	var applySettings = function(data) {
+		$scope.application = data.application;
+		$scope.openSeason = data.openSeason;
+		$scope.gemsProfile = data.gemsProfile;
+	};
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	} else {
+		$scope.$on('slrp_application_loaded', function(event, data) {
+			applySettings($rootScope);
+		});
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>label {
+  min-width: 110px;
+  font-weight: bold;
+  margin-right: 1em;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>gems-profile</id>
+        <internal>false</internal>
+        <link/>
+        <name>GEMS Profile</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	
+	var user = gs.getUserDisplayName();
+	data.userName = user;
+	
+
+	
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-11 05:05:09</sys_created_on>
+        <sys_id>62b3b4c5dba8030052ff76721f961922</sys_id>
+        <sys_mod_count>62</sys_mod_count>
+        <sys_name>GEMS Profile</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_62b3b4c5dba8030052ff76721f961922</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-04 15:07:01</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-info">
+  <div class="panel-heading">
+    Profile
+  </div>
+  <div class="panel-body">
+    <div class="form-horizontal">
+    	<div class="row">
+        <div class="col-sm-3">
+          <label class="control-label">Name:</label>
+          <span class="form-control-static">{{data.userName}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Open Season:</label>
+          <span class="form-control-static">{{data.openSeason.year}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Status:</label>
+          <span class="form-control-static">{{application.status}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Status Date:</label>
+          <span class="form-control-static">{{application.status_updated_on || application.sys_updated_on}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <label class="control-label">Service Type:</label>
+          <span class="form-control-static">{{gemsProfile.service_type}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Tenure:</label>
+          <span class="form-control-static">{{gemsProfile.tenure}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Legal Auth:</label>
+          <span class="form-control-static">{{gemsProfile.u_service_type_code}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">LNA (NTE Date):</label>
+          <span class="form-control-static">{{gemsProfile.u_service_type_code}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <label class="control-label">Post/Office:</label>
+          <span class="form-control-static">{{gemsProfile.u_bureau_ref}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Occupation:</label>
+          <span class="form-control-static">{{gemsProfile.u_skill_code}}</span>
+        </div>
+        <div class="col-sm-3">
+          <label class="control-label">Employee Status:</label>
+          <span class="form-control-static">{{gemsProfile.employment_status}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

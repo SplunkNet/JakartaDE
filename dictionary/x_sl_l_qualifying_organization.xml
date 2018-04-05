@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="Legacy - Qualifying Organization" max_length="40" name="x_sl_l_qualifying_organization" type="collection">
+        <element attributes="import_attribute_name=ORG_CODE,edge_encryption_enabled=true" label="ORG_CODE" max_length="40" name="u_org_code" type="string"/>
+        <element attributes="import_attribute_name=QO_CREATE_DATE,edge_encryption_enabled=true" label="QO_CREATE_DATE" max_length="40" name="u_qo_create_date" type="string"/>
+        <element attributes="import_attribute_name=QO_CREATE_ID,edge_encryption_enabled=true" label="QO_CREATE_ID" max_length="40" name="u_qo_create_id" type="string"/>
+        <element attributes="import_attribute_name=QO_ELIGIBLE_SHIFT_WORK_IND,edge_encryption_enabled=true" label="QO_ELIGIBLE_SHIFT_WORK_IND" max_length="40" name="u_qo_eligible_shift_work_ind" type="string"/>
+        <element attributes="import_attribute_name=QO_QUALIFICATION_IND,edge_encryption_enabled=true" label="QO_QUALIFICATION_IND" max_length="40" name="u_qo_qualification_ind" type="string"/>
+        <element attributes="import_attribute_name=QO_SEQ_NUM,edge_encryption_enabled=true" label="QO_SEQ_NUM" max_length="40" name="u_qo_seq_num" type="string"/>
+        <element attributes="import_attribute_name=QO_UPDATE_DATE,edge_encryption_enabled=true" label="QO_UPDATE_DATE" max_length="40" name="u_qo_update_date" type="string"/>
+        <element attributes="import_attribute_name=QO_UPDATE_ID,edge_encryption_enabled=true" label="QO_UPDATE_ID" max_length="40" name="u_qo_update_id" type="string"/>
+        <element attributes="import_attribute_name=RRF_SEQ_NUM,edge_encryption_enabled=true" label="RRF_SEQ_NUM" max_length="40" name="u_rrf_seq_num" type="string"/>
+    </element>
+</database>

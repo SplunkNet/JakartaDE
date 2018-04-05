@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_section caption="" section_id="e08d93e8db64030052ff76721f961902" sys_domain="global" table="x_sl_open_season" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>year</element>
+            <position>0</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-10 04:12:15</sys_created_on>
+            <sys_id>4a0e17e8db64030052ff76721f9619bc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-10 04:12:15</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>status</element>
+            <position>1</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-10 04:12:15</sys_created_on>
+            <sys_id>ca0e17e8db64030052ff76721f9619bc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-10 04:12:15</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>2</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-10 04:12:15</sys_created_on>
+            <sys_id>4e0e17e8db64030052ff76721f9619bc</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-10 04:12:15</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>active</element>
+            <position>3</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-10 04:14:31</sys_created_on>
+            <sys_id>4b8e17e8db64030052ff76721f961965</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-10 04:14:31</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>begin_date</element>
+            <position>4</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:29:06</sys_created_on>
+            <sys_id>1fdee35fdbe0c30052ff76721f96199e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:29:06</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>end_date</element>
+            <position>5</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:29:06</sys_created_on>
+            <sys_id>dbdee35fdbe0c30052ff76721f9619a0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:29:06</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>type</element>
+            <position>6</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:29:06</sys_created_on>
+            <sys_id>9bdee35fdbe0c30052ff76721f9619a2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:29:06</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>min_loan_balance</element>
+            <position>7</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:36:30</sys_created_on>
+            <sys_id>2b80f75fdbe0c30052ff76721f9619e8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:36:30</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>max_yearly_payment</element>
+            <position>8</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:36:30</sys_created_on>
+            <sys_id>f780f75fdbe0c30052ff76721f9619ea</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:36:30</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>max_lifetime_payment</element>
+            <position>9</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:36:30</sys_created_on>
+            <sys_id>b780f75fdbe0c30052ff76721f9619ec</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:36:30</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>post_qualification</element>
+            <position>10</position>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-18 18:41:47</sys_created_on>
+            <sys_id>8dc1bf5fdbe0c30052ff76721f961966</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_sl_open_season" sys_domain="global" view="Default view">e08d93e8db64030052ff76721f961902</sys_ui_section>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-18 18:41:47</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_sl_open_season</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-10 04:09:59</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e08d93e8db64030052ff76721f961902</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_sl_open_season</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+            <sys_update_name>sys_ui_section_e08d93e8db64030052ff76721f961902</sys_update_name>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-10 04:09:59</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

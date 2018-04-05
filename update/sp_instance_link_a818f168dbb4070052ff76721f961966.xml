@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_instance_link">
+    <sp_instance_link action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>success</color>
+        <css/>
+        <glyph>copy</glyph>
+        <id/>
+        <kb_article/>
+        <kb_category/>
+        <kb_topic/>
+        <order>1</order>
+        <roles/>
+        <sc_cat_item/>
+        <sc_category/>
+        <short_description>Upload your loan documents</short_description>
+        <size>md</size>
+        <sp_column display_value="3">4961decadb2c430052ff76721f961990</sp_column>
+        <sp_page display_value="slrp_upload_loan_documents">e0e73168dbb4070052ff76721f9619bc</sp_page>
+        <sp_widget display_value="Icon Link">3caa67afcb13020000f8d856634c9c2e</sp_widget>
+        <sys_class_name>sp_instance_link</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-22 07:02:29</sys_created_on>
+        <sys_id>a818f168dbb4070052ff76721f961966</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Loan Documents</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_instance_link_a818f168dbb4070052ff76721f961966</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-22 07:03:54</sys_updated_on>
+        <title>Loan Documents</title>
+        <type>page</type>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"link_template": {
+		"value": "Circle Icon",
+		"displayValue": "Circle Icon"
+	}
+}]]></widget_parameters>
+    </sp_instance_link>
+    <sys_translated_text action="delete_multiple" query="documentkey=a818f168dbb4070052ff76721f961966"/>
+</record_update>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Occupational Series" max_length="40" name="x_sl_occupational_series" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element display="true" label="Code" max_length="40" name="code" type="string"/>
+        <element label="Description" max_length="255" name="description" type="string"/>
+        <element label="Number" max_length="40" name="number" type="integer"/>
+        <element label="Qualified" max_length="40" name="qualified" type="boolean"/>
+    </element>
+</database>

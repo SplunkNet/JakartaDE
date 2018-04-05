@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Loan Type" max_length="40" name="x_sl_loan_type" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Code" max_length="40" name="code" type="string"/>
+        <element label="Description" max_length="255" name="description" type="string"/>
+        <element label="Sequence Number" max_length="40" name="number" type="integer"/>
+        <element label="Qualified" max_length="40" name="qualified" type="boolean"/>
+    </element>
+</database>

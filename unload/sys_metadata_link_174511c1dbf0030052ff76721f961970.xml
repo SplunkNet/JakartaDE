@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>0c0b2bd21d480300f28f729badefa8d6</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="x_slrp_lender">
+    <x_slrp_lender action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <group_sequence/>
+        <lndr_aba_routing_num_text/>
+        <lndr_acct_num_text/>
+        <lndr_alt_phone_num_text/>
+        <lndr_code>CLC</lndr_code>
+        <lndr_name_text>College Loan Corporation</lndr_name_text>
+        <lndr_note_text>4/13/09 in calling learned that CLC now ACS and at the PO named they only accept coupon payments.  N</lndr_note_text>
+        <lndr_payment_instruction_text/>
+        <lndr_paymnt_adrs1_text>CLC Servicing Center</lndr_paymnt_adrs1_text>
+        <lndr_paymnt_adrs2_text>P. O. Box 660041</lndr_paymnt_adrs2_text>
+        <lndr_paymnt_city_text>Dallas</lndr_paymnt_city_text>
+        <lndr_paymnt_state_code>TX</lndr_paymnt_state_code>
+        <lndr_paymnt_zip_code_text>75266-0041</lndr_paymnt_zip_code_text>
+        <lndr_phone_num_text>1800951425</lndr_phone_num_text>
+        <lndr_poc_email_address_text/>
+        <lndr_poc_name/>
+        <lndr_poc_phone_num_text/>
+        <lndr_web_address_text>customerservice@clcservicing.com</lndr_web_address_text>
+        <number>LEN89</number>
+        <open_season_app/>
+        <sys_class_name>x_slrp_lender</sys_class_name>
+        <sys_created_by>michael.ferrari</sys_created_by>
+        <sys_created_on>2017-07-21 19:06:55</sys_created_on>
+        <sys_id>0c0b2bd21d480300f28f729badefa8d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>michael.ferrari</sys_updated_by>
+        <sys_updated_on>2017-07-21 19:06:55</sys_updated_on>
+    </x_slrp_lender>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>cmayfield@KPMG.com</sys_created_by>
+        <sys_created_on>2017-08-23 17:47:33</sys_created_on>
+        <sys_id>174511c1dbf0030052ff76721f961970</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>College Loan Corporation</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sys_metadata_link_174511c1dbf0030052ff76721f961970</sys_update_name>
+        <sys_updated_by>cmayfield@KPMG.com</sys_updated_by>
+        <sys_updated_on>2017-08-23 17:47:33</sys_updated_on>
+        <tablename>x_slrp_lender</tablename>
+    </sys_metadata_link>
+</record_update>

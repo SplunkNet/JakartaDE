@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	c.answer = $scope.$parent.data.answers[c.options.index];
+	c.formName = 'yes' + c.options.index + 'Form';
+
+	$scope.$emit('register_child_form', c.options.index);
+	
+	$scope.$on('submit_child_form', function(event, data) {
+		if (!c.options.readOnly) {
+			console.log('Saving Loans on Child Form...');
+			if (data == c.options.index) {
+				c.server.get({
+					loans: c.data.loans,
+					options: c.options
+				}).then(function(response) {
+					c.data = response.data;
+					parseLoans();
+					$scope.$emit('child_form_submitted');
+				});
+			}	
+		}
+	})
+	
+	if (!c.answer.data) {
+		c.answer.data = {};
+	} 
+	
+	if (!c.answer.data.loanTypes) {
+		c.answer.data.loanTypes = {};
+	}
+	
+	c.data.loanTypes.forEach(function(loanType) {
+		c.answer.data.loanTypes[loanType.code] = 
+			c.answer.data.loanTypes[loanType.code] || false;
+	});
+
+	var parseLoans = function() {
+		c.data.loans.forEach(function(loan) {
+			if (loan.balance_date) {
+				loan.balance_date = new Date(loan.balance_date)
+			}
+		});
+	}
+	
+	parseLoans();
+	
+	$scope.addLoan = function() {
+		c.data.loans.push({})
+	}
+	
+	$scope.removeLoan = function(i) {
+		if (i > -1) {
+			c.data.loans.splice(i, 1);
+		}
+	}
+	
+	$scope.optionsRequired = function() {
+		if (c.answer.value == 'yes') {
+			for (var key in c.answer.data.loanTypes) {
+				if (c.answer.data.loanTypes[key]) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	$scope.hasValue = function(value) {
+		return !!value;
+	}
+	
+	var getTotalBalance = function() {
+		var total = 0;
+		c.data.loans.forEach(function(loan) {
+			if (loan.outstanding_balance) {
+				total = total + loan.outstanding_balance;
+			}
+		});
+		return total;
+	}
+	
+	$scope.getTotalBalance = getTotalBalance;
+	
+	$scope.meetsMinBalance = function() {
+		return getTotalBalance() >= c.options.min_balance;
+	}
+	
+	$scope.moveDown = function(i) {
+		if (i < c.data.loans.length - 1) {
+			var x = c.data.loans[i];
+			c.data.loans[i] = c.data.loans[i+1];
+			c.data.loans[i+1] = x;
+		}
+	}
+	
+	$scope.moveUp = function(i) {
+		if (i > 0) {
+			var x = c.data.loans[i];
+			c.data.loans[i] = c.data.loans[i-1];
+			c.data.loans[i-1] = x;
+		}
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slrp_loan_information</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - Loan Information</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	if (input && input.loans) {
+		options = input.options;
+		//delete all existing loans
+		
+		if (options.appId) {
+			var record = new GlideRecord('x_sl_loan');
+			record.addQuery('application', options.appId);
+			record.deleteMultiple();
+
+			input.loans.forEach(function(loan, i) {
+				record = new GlideRecord('x_sl_loan');
+				mapLoanRecord(record, loan, i);
+				record.insert();
+			});
+		}
+	} else {
+		var gr = new GlideRecord('x_sl_loan_type');
+		gr.addQuery('active', true);
+		gr.addQuery('qualified', true);
+		gr.orderBy('description');
+		gr.query();
+
+		data.loanTypes = [];
+		while (gr.next()) {
+			data.loanTypes.push({
+				number: Number(gr.number),
+				code: gr.code.toString(),
+				description: gr.description.toString()
+			});
+		}
+
+		var lr = new GlideRecord('x_sl_lender');
+		lr.addQuery('active', true);
+		lr.orderBy('name');
+		lr.query();
+
+		data.lenders = [];
+		while (lr.next()) {
+			data.lenders.push({
+				sys_id: lr.getValue('sys_id'),
+				code: lr.code.toString(),
+				name: lr.name.toString()
+			});
+		}
+	}
+	
+	//always load loans...
+	loadLoans();	
+})();
+
+function getLoanGlideRecords() {
+	var loans = new GlideRecord('x_sl_loan');
+	loans.addQuery('application', options.appId);
+	loans.orderBy('number');
+	loans.query();
+	return loans;
+}
+
+function loadLoans() {
+	var loans = getLoanGlideRecords();
+	data.loans = [];
+	while (loans.next()) {
+		data.loans.push({
+			lender: loans.lender.sys_id.toString(),
+			outstanding_balance: Number(loans.outstanding_balance),
+			balance_date: loans.getValue('balance_date')
+		});
+	}
+	
+	//fill with empty first record if there is nothing
+	if (data.loans.length == 0) {
+		data.loans.push({});
+	}
+}
+
+function mapLoanRecord(record, loan, i) {
+	console.log(options.appId);
+	record.setValue('lender', loan.lender);
+	record.setValue('outstanding_balance', loan.outstanding_balance);
+	record.setValue('balance_date', loan.balance_date);
+	record.setValue('number', i);
+	record.setValue('application', options.appId);
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-21 19:05:43</sys_created_on>
+        <sys_id>0904d754dbf0070052ff76721f9619c5</sys_id>
+        <sys_mod_count>272</sys_mod_count>
+        <sys_name>SLRP - Loan Information</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_0904d754dbf0070052ff76721f9619c5</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-24 16:21:33</sys_updated_on>
+        <template><![CDATA[<ng-form name="{{c.formName}}">
+  <div>
+    <div ng-repeat="(key, value) in c.errors" class="alert alert-danger">
+      {{value}}
+    </div>
+    <p>
+      <b>Please select at least one loan type:</b>
+    </p>
+    <div class="row">
+      <div ng-repeat="loanType in c.data.loanTypes" class="col-sm-6">
+        <div class="checkbox">
+          <label>
+            <input name="loanTypes" type="checkbox" value="{{loanType.code}}" ng-model="c.answer.data.loanTypes[loanType.code]" ng-required="optionsRequired()" ng-disabled="c.options.readOnly" novalidate>
+            {{loanType.description}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="alert alert-warning">
+      Complete the following blocks for each of your oustanding <b>qualifying loans</b>
+      in the order you wish the payments to be credited. The loan which you would like
+      payment to be applied to first should be listed first.
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-condensed table-striped table-bordered">
+          <thead>
+            <tr>
+              <td ng-if="!c.options.readOnly"></td>
+              <td>Loan Service Organization</td>
+              <td>Outstanding Balance</td>
+              <td>Date of Balance</td>
+              <td ng-if="!c.options.readOnly"></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="loan in c.data.loans">
+              <td ng-if="!c.options.readOnly" class="text-center" style="vertical-align: middle">
+                <i ng-if="$index == 0" class="fa fa-lg" style="display:block">&nbsp;</i>
+                <i ng-if="$index > 0" 
+                   ng-click="moveUp($index)"
+                   class="fa fa-lg fa-caret-up" style="display:block"></i>
+                <i ng-if="$index < c.data.loans.length - 1" 
+                   ng-click="moveDown($index)"
+                   class="fa fa-lg fa-caret-down" style="display:block"></i>
+              </td>
+              <td class="{{hasValue(loan.lender) ? 'has-success' : 'has-error'}}">
+                <select name="lender[{{$index}}]" class="form-control" ng-model="c.data.loans[$index].lender" ng-required="true" ng-disabled="c.options.readOnly">
+                  <option value="">Select One</option>
+                  <option ng-repeat="lender in c.data.lenders" value="{{lender.sys_id}}">
+                    {{lender.name}}
+                  </option>
+                </select>
+              </td>
+              <td class="{{hasValue(loan.outstanding_balance) && meetsMinBalance() ? 'has-success' : 'has-error'}}">
+                <input name="oustanding_balance[{{$index}}]" 
+                       type="number" 
+                       class="form-control" 
+                       placeholder="Whole Numbers Only" 
+                       ng-required="true"
+                       ng-disabled="c.options.readOnly"
+                       ng-pattern="/^[0-9]*$/"
+                       ng-model="c.data.loans[$index].outstanding_balance">
+              </td>
+              <td class="{{hasValue(loan.balance_date) ? 'has-success' : 'has-error'}}">
+                <input name="balance_date[{{$index}}]" type="date" class="form-control" ng-model="c.data.loans[$index].balance_date" ng-disabled="c.options.readOnly" ng-required="true">
+              </td>
+              <td ng-if="!c.options.readOnly" style="vertical-align:middle" class="text-center">
+                <i ng-if="$index == 0" class="fa fa-fw fa-lg">&nbsp;</i>
+                <i ng-if="$index > 0" class="fa fa-minus-circle fa-fw fa-lg" ng-click="removeLoan($index)"></i>
+                <i class="fa fa-plus-circle fa-fw fa-lg" ng-click="addLoan()"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-right" colspan="2">
+                <b>Total Balance</b><span ng-show="!meetsMinBalance()">&nbsp;(must be greater than or equal to {{c.options.min_balance | currency:'$':0}})</span>:
+              </td>
+              <td class="text-center {{meetsMinBalance() ? 'bg-success' : 'bg-danger'}}" colspan="3">
+                <b>{{getTotalBalance() | currency:"$":0}}</b>
+                
+                <!-- this hidden input is to force validation on total balance -->
+                <input type="text" class="hidden" ng-required="!meetsMinBalance()" ng-model="c.data.totalBalance">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</ng-form>]]></template>
+    </sp_widget>
+</record_update>

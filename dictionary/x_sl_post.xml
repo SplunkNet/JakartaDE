@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Post" max_length="40" name="x_sl_post" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Danger Pay" max_length="40" name="danger_pay" type="boolean"/>
+        <element label="Different Rate" max_length="40" name="different_rate" type="boolean"/>
+        <element label="Name" max_length="40" name="name" type="string"/>
+        <element display="true" label="Number" max_length="40" name="number" type="integer"/>
+        <element label="Qualified" max_length="40" name="qualified" type="boolean"/>
+    </element>
+</database>

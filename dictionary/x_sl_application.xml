@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Application" max_length="40" name="x_sl_application" type="collection">
+        <element label="Alternate Email Addresses" max_length="40" name="alternate_email_addresses" type="string"/>
+        <element label="Applicant" max_length="32" name="applicant" reference="sys_user" type="reference"/>
+        <element label="Certified" max_length="40" name="certified" type="boolean"/>
+        <element label="Contact Information Confirmed" max_length="40" name="contact_information_confirmed" type="boolean"/>
+        <element choice="3" default="1" label="Current Question" max_length="32" name="current_question" reference="x_sl_question" type="reference">
+            <choice/>
+        </element>
+        <element label="Is Disqualified" max_length="40" name="is_disqualified" type="boolean"/>
+        <element label="Open Season" max_length="32" name="open_season" reference="x_sl_open_season" type="reference"/>
+        <element label="Privacy Policy Seen" max_length="40" name="privacy_policy_seen" type="boolean"/>
+        <element label="Service Agreement Agreed" max_length="40" name="service_agreement_agreed" type="boolean"/>
+        <element label="Status" max_length="40" name="status" type="string"/>
+        <element label="Status Updated By" max_length="40" name="status_updated_by" type="string"/>
+        <element label="Status Updated" max_length="40" name="status_updated_on" type="glide_date_time"/>
+        <index name="index">
+            <element name="current_question"/>
+        </index>
+        <index name="index2">
+            <element name="open_season"/>
+        </index>
+        <index name="index3">
+            <element name="applicant"/>
+        </index>
+    </element>
+</database>

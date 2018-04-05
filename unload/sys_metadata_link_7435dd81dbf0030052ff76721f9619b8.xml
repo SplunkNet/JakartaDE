@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>2e9667521d480300f28f729badefa85d</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="x_slrp_hradmin_contact">
+    <x_slrp_hradmin_contact action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <hc_adrs1_text>RM/GFS/C/APP/DP</hc_adrs1_text>
+        <hc_adrs2_text>Charleston Financial Service Center, P.O</hc_adrs2_text>
+        <hc_alt_phone_num_text>843-308-5626</hc_alt_phone_num_text>
+        <hc_city_text>Charleston</hc_city_text>
+        <hc_email_address_text>HarrisJ3@state.gov</hc_email_address_text>
+        <hc_fax_num_text>843-308-5625</hc_fax_num_text>
+        <hc_phone_num_text>843-308-5624</hc_phone_num_text>
+        <hc_poc_name_text>Harris, JoEthel (Chief of Domestic Payroll)</hc_poc_name_text>
+        <hc_state_code>SC</hc_state_code>
+        <hc_zip_code_text>29418</hc_zip_code_text>
+        <number>HRA76</number>
+        <sys_class_name>x_slrp_hradmin_contact</sys_class_name>
+        <sys_created_by>michael.ferrari</sys_created_by>
+        <sys_created_on>2017-07-21 18:47:41</sys_created_on>
+        <sys_id>2e9667521d480300f28f729badefa85d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>michael.ferrari</sys_updated_by>
+        <sys_updated_on>2017-07-21 18:47:41</sys_updated_on>
+    </x_slrp_hradmin_contact>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>cmayfield@KPMG.com</sys_created_by>
+        <sys_created_on>2017-08-23 17:47:06</sys_created_on>
+        <sys_id>7435dd81dbf0030052ff76721f9619b8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>HRA76</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sys_metadata_link_7435dd81dbf0030052ff76721f9619b8</sys_update_name>
+        <sys_updated_by>cmayfield@KPMG.com</sys_updated_by>
+        <sys_updated_on>2017-08-23 17:47:06</sys_updated_on>
+        <tablename>x_slrp_hradmin_contact</tablename>
+    </sys_metadata_link>
+</record_update>

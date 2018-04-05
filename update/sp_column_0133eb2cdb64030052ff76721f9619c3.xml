@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_column">
+    <sp_column action="INSERT_OR_UPDATE">
+        <class_name/>
+        <order>1</order>
+        <size>12</size>
+        <size_lg/>
+        <size_sm/>
+        <size_xs/>
+        <sp_row display_value="2">4933eb2cdb64030052ff76721f9619c2</sp_row>
+        <sys_class_name>sp_column</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-10 04:34:52</sys_created_on>
+        <sys_id>0133eb2cdb64030052ff76721f9619c3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>1</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_column_0133eb2cdb64030052ff76721f9619c3</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-10 04:34:52</sys_updated_on>
+    </sp_column>
+</record_update>

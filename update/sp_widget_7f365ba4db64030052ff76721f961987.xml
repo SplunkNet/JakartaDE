@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function openSeasonStatusCtrl($rootScope, $scope, $timeout) {
+  /* widget controller */
+  var c = this;
+	
+	$scope.openSeason = $rootScope.openSeason;
+	
+	if (!$rootScope.loaded) {
+		$scope.$on('slrp_application_loaded', function(event, data) {
+			$scope.openSeason = $rootScope.openSeason;
+		});
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>open_season_status</id>
+        <internal>false</internal>
+        <link/>
+        <name>Open Season Status</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-10 03:38:15</sys_created_on>
+        <sys_id>7f365ba4db64030052ff76721f961987</sys_id>
+        <sys_mod_count>60</sys_mod_count>
+        <sys_name>Open Season Status</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_7f365ba4db64030052ff76721f961987</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-22 06:50:37</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-{{::openSeason.status === 'Open' ? 'success' : 'warning'}}">
+  <div class="panel-heading text-center">
+    Open Season {{openSeason.year}} is <span class="text-uppercase">{{openSeason.status}}</span>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

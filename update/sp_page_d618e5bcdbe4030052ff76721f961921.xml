@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <css/>
+        <draft>false</draft>
+        <id>slrp_login</id>
+        <internal>false</internal>
+        <public>false</public>
+        <roles/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-10 14:15:29</sys_created_on>
+        <sys_id>d618e5bcdbe4030052ff76721f961921</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>slrp_login</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_page_d618e5bcdbe4030052ff76721f961921</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-10 14:15:29</sys_updated_on>
+        <title>SLRP Login</title>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=d618e5bcdbe4030052ff76721f961921"/>
+</record_update>

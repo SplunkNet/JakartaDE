@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="Legacy - Qualifying Post" max_length="40" name="x_sl_l_qualifying_post" type="collection">
+        <element attributes="import_attribute_name=DSV_ID,edge_encryption_enabled=true" label="DSV_ID" max_length="40" name="u_dsv_id" type="string"/>
+        <element attributes="import_attribute_name=HC_SEQ_NUM,edge_encryption_enabled=true" label="HC_SEQ_NUM" max_length="40" name="u_hc_seq_num" type="string"/>
+        <element attributes="import_attribute_name=QP_BUREAU_CODE,edge_encryption_enabled=true" label="QP_BUREAU_CODE" max_length="40" name="u_qp_bureau_code" type="string"/>
+        <element attributes="import_attribute_name=QP_CNTRY_CD,edge_encryption_enabled=true" label="QP_CNTRY_CD" max_length="40" name="u_qp_cntry_cd" type="string"/>
+        <element attributes="import_attribute_name=QP_CREATE_DATE,edge_encryption_enabled=true" label="QP_CREATE_DATE" max_length="40" name="u_qp_create_date" type="string"/>
+        <element attributes="import_attribute_name=QP_CREATE_ID,edge_encryption_enabled=true" label="QP_CREATE_ID" max_length="40" name="u_qp_create_id" type="string"/>
+        <element attributes="import_attribute_name=QP_DANGER_PAY_IND,edge_encryption_enabled=true" label="QP_DANGER_PAY_IND" max_length="40" name="u_qp_danger_pay_ind" type="string"/>
+        <element attributes="import_attribute_name=QP_DIFF_RATE_IND,edge_encryption_enabled=true" label="QP_DIFF_RATE_IND" max_length="40" name="u_qp_diff_rate_ind" type="string"/>
+        <element attributes="import_attribute_name=QP_MISSION_TYPE_TEXT,edge_encryption_enabled=true" label="QP_MISSION_TYPE_TEXT" max_length="40" name="u_qp_mission_type_text" type="string"/>
+        <element attributes="import_attribute_name=QP_NAME_TEXT,edge_encryption_enabled=true" label="QP_NAME_TEXT" max_length="40" name="u_qp_name_text" type="string"/>
+        <element attributes="import_attribute_name=QP_QUALIFICATION_IND,edge_encryption_enabled=true" label="QP_QUALIFICATION_IND" max_length="40" name="u_qp_qualification_ind" type="string"/>
+        <element attributes="import_attribute_name=QP_SEQ_NUM,edge_encryption_enabled=true" label="QP_SEQ_NUM" max_length="40" name="u_qp_seq_num" type="string"/>
+        <element attributes="import_attribute_name=QP_UPDATE_DATE,edge_encryption_enabled=true" label="QP_UPDATE_DATE" max_length="40" name="u_qp_update_date" type="string"/>
+        <element attributes="import_attribute_name=QP_UPDATE_ID,edge_encryption_enabled=true" label="QP_UPDATE_ID" max_length="40" name="u_qp_update_id" type="string"/>
+    </element>
+</database>

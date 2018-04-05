@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope, $scope) {
+  /* widget controller */
+  var c = this;
+	
+	var applySettings = function(data) {
+		$scope.application = data.application;
+		$scope.gemsProfile = data.gemsProfile;
+		$scope.isLoaded = true;
+	}
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	}
+	
+	$scope.$on('slrp_application_loaded', function(event, data) {
+		applySettings($rootScope);
+	});
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>slrp_service_agreement</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - Service Agreement</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+var gr = new GlideRecord('x_sl_application');  
+gr.addQuery('sys_id', '063a0581db7c07006383fd0d0f9619e8');
+	gr.query();
+	while (gr.next()){
+		var appData = [];
+		data.applicant = gr.getValue('applicant');
+		data.
+		//appArray.push(appData);
+	}
+	//gr.addQuery('sys_id', data.application.sys_id);
+//data.applicant = gr.applicant;  
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-14 05:25:02</sys_created_on>
+        <sys_id>8f059482dba8430052ff76721f96190b</sys_id>
+        <sys_mod_count>61</sys_mod_count>
+        <sys_name>SLRP - Service Agreement</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_8f059482dba8430052ff76721f96190b</sys_update_name>
+        <sys_updated_by>cmayfield@KPMG.com</sys_updated_by>
+        <sys_updated_on>2017-08-24 19:58:07</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-info">
+	<div class="panel-heading">
+    Student Loan Repayment Program (SLRP) &nbsp;&nbsp; | &nbsp;&nbsp; Service Agreement
+  </div>
+  <div class="panel-body">
+    	<div class="row">
+        <div class="form-group col-md-3">
+          <label for="applicant_name">Name:</label>
+          {{applicant}}
+          <input type="text" class="form-control input-sm" id="applicant_name" value="{{data.applicant}}" disabled="false" />
+        </div>
+        <p>{{applicant}}test</p>
+        <div class="form-group col-md-3">
+           <label for="career_type">Career Type:</label>
+           <input type="text" class="form-control input-sm" id="career_type" value="${app.service_type2 == 'C' ? 'Civil' : 'Foreign'} Service" disabled="true" />
+        </div>
+        <div class="form-group col-md-3">
+           <label for="ssn">Social Security #:</label>
+           <input type="text" class="form-control input-sm" id="ssn" value="${ssn}" disabled="true"/>
+        </div>
+        <div class="form-group col-md-3">
+           <label for="gems_id">GEMS ID:</label>
+           <input type="text" class="form-control input-sm" id="gems_id" value="${app.gems_id}" disabled="true" />
+        </div>
+      </div>
+    	<div class="row">
+				<div class="col-md-12">
+					<p>
+						<strong>
+						<em>
+              In consideration of the student loan repayment benefit for which I qualify under 5 U.S.C. 5379 as
+							implemented by the regulations of the U.S. Office of Personnel Management (5 CFR Part 537) and the policies
+							of the U.S. Department of State, I hereby agree:
+						</em>
+					</strong>
+				</p>
+			</div>
+		</div>
+    <div class="row">
+      <div class="col-sm-12">
+        <ol>
+          <li>
+            <div class="form-inline">
+              <dl>
+                <dt>
+                  <div class="form-group">
+                    <label for="qualifying_position">To serve in a Qualifying Position:</label>
+                    <input class="form-control input-sm" disabled="true" id="qualifying_position" type="text" value=""/></div>
+                  <div class="form-group">
+                    <label for="occupation_series">Occupation Series:</label>
+                    <input class="form-control input-sm" disabled="true" id="occupation_series" type="text" value="${q.qualifying_occupational_series.occ_code}"/></div>
+                </dt>
+                <dt>OR</dt>
+                <dt>
+                  <div class="form-group">
+                    <label for="overseas_post">To serve at a Qualifying Overseas Post:</label>
+                    <input class="form-control input-sm" disabled="true" id="overseas_post" type="text" value=""/></div>
+                </dt>
+              </dl>
+            </div>
+          </li>
+          <li>
+            <p style="font-weight:bolder">Check one box only:
+              <span class="checkbox">
+                <label>
+                  <input checked="true" disabled="true" type="checkbox"/>
+                  To complete three (3) years of service with the Department; or</label>
+              </span>
+              <span class="checkbox">
+                <label>
+                  <input checked="true" disabled="true" type="checkbox"/>To complete one (1) additional year of service with the Department; or</label>
+              </span>
+              <span class="checkbox">
+                <label>
+                  <input checked="true" disabled="true" type="checkbox"/>Second year of participation; additional service commitment not required.</label>
+              </span>
+            </p>
+          </li>
+          <li>
+            <p>The amount of the student loan repayment I am requesting in FY ${app.open_season.replace(/[^0-9\.]+/g, '');} will not exceed $10,000.
+          </p>
+          </li>
+          <li>
+            <p>The student loan repayment incentive is only available to employees who have student loans qualifying for the Department's Student Loan Repayment Program.
+          </p>
+          </li>
+          <li>
+            <p>This Service Agreement in no way constitutes a right, promise, or entitlement for student loan repayment incentives beyond this year. I understand that future program offerings and/or lump sum payment levels are dependent on the availability of funding and the annual classification by the Department of positions deemed to be either mission critical and/or mission essential to the Department. I understand that renewal is not automatic and that I must apply annually.
+          </p>
+          </li>
+          <li>
+            <p>The initial service commitment period will end three years after the last day of the open season application period in which the employee qualified. An employee may receive (if otherwise qualified) the student loan repayment
+  incentive for a second year without extending the initial service commitment. For an employee who is seeking the
+  student loan repayment incentive beyond the second year, each additional year of participation will require the
+  employee to add one year to the existing service commitment period or require that a new service commitment period
+          be established.
+          </p>
+          </li>
+          <li>
+            <p>This service agreement in no way constitutes a right, promise, or entitlement for continued employment or
+  noncompetitive conversion to the competitive service. Acceptance of this agreement does not alter the conditions or
+  terms of my employment. Accordingly, this agreement will not preclude nor limit the U.S. Department of State from
+  effecting personnel actions as may be appropriate.
+          </p>
+          </li>
+          <li>
+            <p>I authorize the Department and its designated employees or agents to verify the status, payment history and
+  outstanding balance of each federally insured student loan I have taken out, and to discuss the terms with the lender,
+  loan servicing organization, predecessors or successors in interest.
+          </p>
+          </li>
+          <li>
+            <p>Loan repayments made by the U.S. Department of State pursuant to this Agreement do not exempt me from
+  responsibility and/or liability for the full amount of any loan taken out by me.
+          </p>
+          </li>
+          <li>
+            <p>I agree to continue to make regularly scheduled payments on all my federally insured student loans. As such, I agree that I will not place my loans in a deferment or forbearance status anytime while subject to a service
+  agreement. I understand that the student loan repayment incentive is intended as a supplement to, not a substitute
+  for, my independent payments on all of my student loans. I understand that failure to make independent payments on
+  my federally insured student loans in the amount that would be due to my lender without the benefit of the student
+  loan repayment incentive constitutes a breach of this agreement and will render me ineligible for the student loan
+  repayment incentive program for two years.
+          </p>
+          </li>
+          <li>
+            <p>I agree to maintain records of my payment history for the entire length of my service commitment to ensure
+  compliance with the student loan repayment program. I agree to submit such documentation as part of the eligibility
+  application to HR/ER/WLD. Failure to submit this documentation will render me ineligible for the student loan
+  repayment incentive.
+          </p>
+          </li>
+          <li>
+            <p>I will notify HR/ER/WLD in writing immediately should any of the following occur: a) any transfer to a new position or posting; b) my intention to voluntarily resign or retire before completing the service agreement commitment period;
+  and c) any period(s) when in leave-without-pay (LWOP) or other periods when I am not in pay status while still
+  subject to a service commitment.
+          </p>
+          </li>
+          <li>
+            <p>I understand that periods of leave-without-pay (LWOP), or other periods when I am not in pay status, do not count toward completion of the required service period, and any such periods will extend my service completion date by the
+  total amount of time spent in non-pay status, except that absences because of uniformed service or compensable
+  injury is considered creditable toward the required service period upon reemployment.
+          </p>
+          </li>
+          <li>
+            <p>In the event that I voluntarily leave the U.S. Department of State, or in the event that I am involuntarily separated for misconduct or poor performance before completing the agreed upon period of service, I will be indebted to the
+  Federal Government and must reimburse the Department of State for the full amount of any student loan repayment
+  funds obligated under this service agreement. This term applies if I leave the Department of State for another agency
+  or department within the federal government.
+          </p>
+          </li>
+          <li>
+            <p>If I apply for and receive the student loan repayment incentive while on a limited term appointment, I understand that I will be required to reimburse the Department of State for the full amount of any student loan repayment funds
+  obligated under this service agreement if I am unable to complete my required service commitment because I am not
+  converted to permanent employment.
+          </p>
+          </li>
+          <li>
+            <p>I understand that any loan payments made on my behalf are taxable and subject to withholdings and that the
+  Department will deduct such withholdings from the approved amount prior to issuing payment to my lender or loan
+  servicing agency. I am responsible for any income tax obligations resulting from the student loan repayments made
+  by the U.S. Department of State.
+          </p>
+          </li>
+          <li>
+            <p>The student loan repayment benefits made on my behalf by the U.S. Department of State will not exceed the
+  legislated lifetime maximum of $60,000.
+          </p>
+          </li>
+        </ol>
+  		</div>
+		</div>
+    <div class="row">
+      <div class="col-sm-12 bg-danger text-center">
+        <h4>By clicking on &quot;I Agree&quot; you agree and consent to the terms and conditions of this Service Agreement.</h4>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-sm-6 text-left">
+        <button class="btn btn-danger float-left">I Disagree</button>
+      </div>
+      <div class="col-sm-6 text-right">
+        <button class="btn btn-primary">I Agree</button>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

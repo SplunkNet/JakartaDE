@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>a69667521d480300f28f729badefa85a</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="x_slrp_hradmin_contact">
+    <x_slrp_hradmin_contact action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <hc_adrs1_text>HR/CDA/EL/GEN</hc_adrs1_text>
+        <hc_adrs2_text>2121 Virginia Ave, SA-3 Room 3200</hc_adrs2_text>
+        <hc_alt_phone_num_text/>
+        <hc_city_text>Washington</hc_city_text>
+        <hc_email_address_text>NoonanHM@state.gov</hc_email_address_text>
+        <hc_fax_num_text/>
+        <hc_phone_num_text>202-663-0454</hc_phone_num_text>
+        <hc_poc_name_text>Noonan, Harriet M</hc_poc_name_text>
+        <hc_state_code>DC</hc_state_code>
+        <hc_zip_code_text>20520</hc_zip_code_text>
+        <number>HRA49</number>
+        <sys_class_name>x_slrp_hradmin_contact</sys_class_name>
+        <sys_created_by>michael.ferrari</sys_created_by>
+        <sys_created_on>2017-07-21 18:47:41</sys_created_on>
+        <sys_id>a69667521d480300f28f729badefa85a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>michael.ferrari</sys_updated_by>
+        <sys_updated_on>2017-07-21 18:47:41</sys_updated_on>
+    </x_slrp_hradmin_contact>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>cmayfield@KPMG.com</sys_created_by>
+        <sys_created_on>2017-08-23 17:47:09</sys_created_on>
+        <sys_id>a935dd81dbf0030052ff76721f9619c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>HRA49</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sys_metadata_link_a935dd81dbf0030052ff76721f9619c0</sys_update_name>
+        <sys_updated_by>cmayfield@KPMG.com</sys_updated_by>
+        <sys_updated_on>2017-08-23 17:47:09</sys_updated_on>
+        <tablename>x_slrp_hradmin_contact</tablename>
+    </sys_metadata_link>
+</record_update>

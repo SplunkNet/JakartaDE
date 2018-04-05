@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="u_qp_diff_rate_ind" label="QP_DIFF_RATE_IND" language="en" table="x_sl_l_qualifying_post">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>u_qp_diff_rate_ind</element>
+            <help/>
+            <hint/>
+            <label>QP_DIFF_RATE_IND</label>
+            <language>en</language>
+            <name>x_sl_l_qualifying_post</name>
+            <plural>QP_DIFF_RATE_INDs</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-22 02:05:09</sys_created_on>
+            <sys_id>cd0478a4db74070052ff76721f961905</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>QP_DIFF_RATE_IND</sys_name>
+            <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+            <sys_update_name>sys_documentation_x_sl_l_qualifying_post_u_qp_diff_rate_ind_en</sys_update_name>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-22 02:05:09</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope, $scope, $window, $location, spUtil) {
+  /* widget controller */
+  var c = this;
+	
+	var applySettings = function(data) {
+		$scope.application = data.application;
+		$scope.openSeason = data.openSeason;
+		$scope.gemsProfile = data.gemsProfile;
+		if (data.application && data.application.privacy_policy_seen == 'true') {
+			//$location.url('?id=slrp_contact_information&aid=' + data.application.sys_id);
+		}
+	}
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	} else {
+		$scope.$on('slrp_application_loaded', function(event, data) {
+			applySettings($rootScope);
+		});
+	}
+	
+	$scope.accept = function() {
+		c.server.get({
+			application: $scope.application,
+			openSeason: $scope.openSeason,
+			gemsProfile: $scope.gemsProfile
+		}).then(function(response) {
+			$scope.$emit('application_updated');
+			spUtil.addInfoMessage('Marking privacy policy as seen.');
+			$location.url('?id=slrp_contact_information&aid=' + response.data.sys_id);
+		})
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slrp_privacy_policy</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - Privacy Policy</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if (input && input.openSeason) {
+		var app;
+		if (input.application) {
+			app = getApplication(input.application.sys_id);
+			if (app.privacy_policy_seen != 'true') {
+				console.log('Found application ' + app.sys_id + ', marking privacy policy seen.')
+				app.setValue('privacy_policy_seen', true);
+				app.update();
+			}
+		} else {
+			console.log('Creating new application for open season ' + input.openSeason.year);
+			app = createApplication(input.openSeason);
+			createQuestionnaire(app, input.gemsProfile);
+		}
+		
+		if (app) {
+			data.sys_id = app.sys_id.toString();
+		}
+	}
+})();
+
+function getApplication(aid) {
+	var user = gs.getUser();
+	var application = new GlideRecord('x_sl_application');
+	application.get(aid);
+	return application;
+}
+
+function createApplication(os) {
+	var user = gs.getUser();
+	var application = new GlideRecord('x_sl_application');
+	application.setValue('applicant', user.getID());
+	application.setValue('open_season', os.sys_id);
+	application.setValue('privacy_policy_seen', true);
+	application.setValue('status', 'Not Submitted');
+	application.insert();
+	return application;
+}
+
+function createQuestionnaire(application, gemsProfile) {
+	var serviceType = gemsProfile && gemsProfile.service_type || 'FS';
+	var gr = new GlideRecord('x_sl_question');
+	var gc = gr.addQuery('service_type', serviceType);
+	gc.addOrCondition('service_type', 'Both');
+	gr.orderBy('number');
+	gr.query();	
+	
+	var answer;
+	var answers = [];
+	while (gr.next()) {
+		answer = new GlideRecord('x_sl_answer');
+		answer.setValue('application', application.sys_id);
+		answer.setValue('question', gr.sys_id);
+		answer.insert();
+		answers.push(answer);
+	}
+	
+	return answers;
+}
+
+function getOpenSeason() {
+	var os = new GlideRecord('x_sl_open_season');
+	os.addQuery('active', true);
+	os.addQuery('status', 'Open');
+	os.query();
+	
+	return os.next() ? os : null;
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-14 03:30:16</sys_created_on>
+        <sys_id>fdca37b1dba8430052ff76721f9619fe</sys_id>
+        <sys_mod_count>149</sys_mod_count>
+        <sys_name>SLRP - Privacy Policy</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_fdca37b1dba8430052ff76721f9619fe</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-22 13:51:45</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-warning">
+	<div class="panel-heading">
+    Privacy Act Statement
+  </div>
+  <div class="panel-body">
+    <h4>Authority:</h4>
+    <p>
+      This information is sought pursuant to 5 U.S.C. 5379 and 5 C.F.R. Part 537 
+    	(which authorize and govern the Department's student loan repayment program);
+    	and 5 U.S.C. 301 and 22 U.S.C. 2651a (which identify the Department of State's 
+      general authorities).
+    </p>
+    <h4>Purpose:</h4>
+    <p>
+      The information solicited on this form will be used to record your request
+      to participate in the Department's Student Loan Repayment Program ("SLRP")
+      and to determine your eligibility for SLRP incentive.
+    </p>
+    <h4>Routine Uses:</h4>
+    <p>
+      The information on this form may be shared with the Office of Personnel Management
+      to fulfill the Department's government-wide personnel management functions, or with
+      law enforcement agencies where there is reason to believe that a law has been violated.
+      More information on the Routine Uses for the system can be found in the System of
+      Records Notice State-31, Human Resource Records.
+    </p>
+    <h4>Disclosure:</h4>
+    <p>
+      Providing the information requested in this application is voluntary. However, your
+      failure to provide the information requested in this application may resulte in
+      the denial of your application and/or payments not being made on your behalf.
+    </p>
+  </div>
+  <div class="panel-footer text-right">
+    <a ng-href="?id=slrp_dashboard" class="btn btn-danger">Cancel</a>
+    <button ng-click="accept()" class="btn btn-success">OK</button>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

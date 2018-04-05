@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope, $scope, $location, $element, $timeout) {
+  /* widget controller */
+  var c = this;
+	c.hasSubmit = {};
+
+	var applySettings = function(data) {
+		$scope.application = data.application;
+		
+		c.server.get({
+			application: $scope.application
+		}).then(function(response) {
+			c.data = response.data;
+			
+			for (var answerKey in c.data.answers) {
+				var answer = c.data.answers[answerKey];
+				for (var dataKey in answer.data) {
+					if (dataKey.indexOf('date') > -1) {
+						answer.data[dataKey] = new Date(answer.data[dataKey]);
+					}
+				}
+			}
+
+			$scope.loaded = $rootScope.loaded;
+		});
+	};
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	} 
+	
+	$scope.$on('slrp_application_loaded', function(event, data) {
+		applySettings($rootScope);
+	});
+	
+	$scope.$on('register_child_form', function(event, data) {
+		c.hasSubmit[data] = true;
+	});
+	
+	$scope.$on('child_form_submitted', function(event, data) {
+		saveAndNext();
+	});
+	
+	$scope.exit = function() {
+		if (!$scope.application.certified) {
+			$scope.save().then(function(response) {
+				$location.url('?id=slrp_dashboard');
+			});
+		}
+	};
+	
+	$scope.save = function() {
+		$scope.saving = true;
+		return c.server.get({
+			answer: c.data.answers[c.data.currentIndex],
+			disqualified: $scope.isDisqualified(c.data.currentIndex)
+		}).then(function(response) {
+			if ($scope.isDisqualified()) {
+				return c.server.get({
+					sys_id: $rootScope.application.sys_id,
+					disqualified: true
+				}).then(function(dr) {
+					$scope.$emit('application_updated');
+					$scope.saving = false;
+					return dr;
+				});
+			} else if ($scope.doCertify()) {
+				return c.server.get({
+					sys_id: $rootScope.application.sys_id,
+					certified: true
+				}).then(function(dr) {
+					$scope.$emit('application_updated');
+					$scope.saving = false;
+					return dr;
+				});
+			} else {
+				$scope.saving = false;
+			}
+			
+			return response;
+		});
+	}
+;
+	var next = function() {
+		if ($scope.isDisqualified()) {
+			$location.url('?id=slrp_dashboard');
+		}	else if ($scope.onLast()) {
+			$location.url('?id=slrp_dashboard');
+		} else if (c.data.currentIndex < c.data.questions.length - 1) {
+			$scope.setCurrent(c.data.currentIndex + 1, true);
+		}
+	};
+	
+	var saveAndNext = function() {
+		if ($scope.application.certified) {
+			next();
+		} else {
+			$scope.save().then(function(response) {
+				next();
+			});
+		}
+	};
+	
+	$scope.next = function() {
+		if (c.hasSubmit[c.data.currentIndex] && this.questionnaireForm['yes' + c.data.currentIndex + 'Form'].$dirty) {
+			console.log('yo');
+			$scope.$broadcast('submit_child_form', c.data.currentIndex);
+		}
+		else {
+			saveAndNext();
+		}
+	};
+	
+	$scope.back = function() {
+		if (c.data.currentIndex > 0) {
+			$scope.setCurrent(c.data.currentIndex - 1);
+		}
+	};
+	
+	$scope.setCurrent = function(index, allowNewMax) {
+		if (allowNewMax || index <= c.data.maxIndex) {
+			c.data.currentIndex = index;
+			if (index > c.data.maxIndex) {
+				c.data.maxIndex = index;
+			}
+		}
+	};
+	
+	$scope.doCertify = function(index) {
+		//assume last question is certification
+		index = index == null ? c.data.currentIndex : index;
+		
+		return index == (c.data.questions.length - 1) && c.data.answers[index].value == 'yes';
+	};
+	
+	$scope.isDisqualified = function(index) {
+		index = index == null ? c.data.currentIndex : index;
+		question = c.data.questions[index];
+		answer = c.data.answers[index];
+
+		return (answer.value == 'no' && question.no_action == 'NQ') || 
+			(answer.value == 'yes' && question.yes_action == 'NQ');
+	};
+	
+	$scope.isActive = function(index) {
+		return index === c.data.currentIndex;
+	};
+	
+	$scope.isAnswered = function(index) {
+		return !!c.data.answers[index].value;
+	};
+	
+	$scope.isDisabled = function(index) {
+		return index > c.data.maxIndex;
+	};
+	
+	$scope.canContinue = function() {
+		return this.questionnaireForm.$valid && c.data.answers && !!c.data.answers[c.data.currentIndex].value;
+	};
+	
+	$scope.onFirst = function() {
+		return c.data.currentIndex === 0;
+	};
+	
+	$scope.onLast = function() {
+		return c.data.currentIndex === c.data.questions.length - 1;
+	};
+	
+	$scope.getCurrent = function() {
+		return c.data.questions[c.data.currentIndex];
+	};
+	
+	$scope.pillStyle = function(index) {
+		var style;
+		if ($scope.isActive(index)) {
+			style = 'active';
+		} else if ($scope.isDisqualified(index)) {
+			style = 'disqualified';
+		} else if ($scope.isAnswered(index)) {
+			style = 'answered';
+		}
+		
+		return style;
+	};
+	
+	$scope.widgetEnabled = function(index, type) {
+		var question = c.data.questions[index];
+		var answer = c.data.answers[index];
+		
+		return question[type + '_widget'] && answer.value == type && c.data.currentIndex === index;
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.nav-pills {
+  li {
+    &amp;.active {
+      a {
+        background-color: $brand-info;
+      }
+    }
+    
+    &amp;.disqualified {
+      a {
+        background-color: $brand-danger;
+      }
+    }
+
+    
+    &amp;.answered {
+      a {
+        background-color: $brand-success;
+      }
+    }
+  }
+}
+
+.panel-body {
+  min-height: 200px;
+  
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slrp-application-form</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP Application Form</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	if (input && input.application) {
+		data.application = input.application;
+		loadQuestions(input.application, data);
+	}
+
+	//had to include input a couple of times because loadQuestions seems
+	//to de-reference input
+	if (input && input.answer) {
+		updateAnswer(input.answer, input.disqualified);
+	}
+	
+	if (input && input.disqualified) {
+		console.log('disqualifying...');
+		data.application = disqualifyApplication(input.sys_id);
+	}
+	
+	if (input && input.certified) {
+		console.log('Certifying application...');
+		data.application = certifyApplication(input.sys_id);
+	}
+	
+})();
+
+function disqualifyApplication(appId) {
+	return updateAppStatus(appId, 'Not Eligible', true, false);
+}
+
+function certifyApplication(appId) {
+	return updateAppStatus(appId, null, false, true);
+}
+
+function updateAppStatus(appId, status, disqualified, certified) {
+	var gr = new GlideRecord('x_sl_application');
+	if (gr.get(appId)) {
+		if (status) {
+			gr.setValue('status', status);
+			gr.setValue('status_updated_on', new Date());
+		}
+		
+		if (disqualified) {
+			gr.setValue('is_disqualified', true);
+		}
+		
+		if (certified) {
+			gr.setValue('certified', true);
+		}
+		
+		return gr.update();
+	} else {
+		gs.addErrorMessage('Unable to retrieve current application!');
+	}
+}
+
+function updateAnswer(answer, disqualified) {
+	var ans = new GlideRecord('x_sl_answer');
+	
+	if (ans.get(answer.sys_id)) {
+		ans.setValue('value', answer.value);
+		ans.setValue('disqualified', disqualified);
+		
+		if (answer.data) {
+			console.log('Saving data: ' + JSON.stringify(answer.data));
+			ans.setValue('data', JSON.stringify(answer.data));
+		}
+		
+		ans.update();
+	}
+}
+
+function loadQuestions(application, data) {
+	var gr = new GlideRecord('x_sl_answer');
+	gr.addQuery('application', application.sys_id);
+	gr.orderBy('question.number');
+	gr.query();
+	
+	data.answers = {};
+	var question;
+	data.questions = [];
+	var i = 0;
+	
+	while (gr.next()) {
+		question = mapQuestion(gr.question, i, application);
+		data.answers[i] = {
+			sys_id: gr.sys_id.toString(),
+			value: gr.value.toString()
+		};
+		
+		data.answers[i].data = gr.data ? JSON.parse(gr.data) : {};
+		
+		if (data.currentIndex == null && (gr.value == null || gr.value.toString().trim() == '' || gr.disqualified)) {
+			data.currentIndex = i;
+		}
+
+		data.questions.push(question);
+		i++;
+	}
+	
+	if (data.currentIndex == null) {
+		data.currentIndex = Number(data.questions.length - 1);
+	}
+	
+	data.maxIndex = Number(data.currentIndex);
+}
+
+function mapQuestion(gr, i, application) {
+	var question = {
+		sys_id: gr.sys_id.toString(),
+		title: gr.title.toString(),
+		text: gr.text.toString(), 
+		guidance: gr.guidance.toString(),
+		number: parseInt(gr.number),
+		yes_action: gr.yes_action.toString(),
+		no_action: gr.no_action.toString()
+	};
+	
+	if (gr.yes_widget_id) {
+		question.yes_widget = $sp.getWidget(gr.yes_widget_id.toString(), 
+																				{index: i,
+																				 readOnly: application.certified,
+																				 min_balance: application.open_season.min_loan_balance,
+																				 max_lifetime: application.open_season.max_lifetime_payment,
+																				 appId: application.sys_id
+																				});
+	}
+	return question;
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-10 18:46:56</sys_created_on>
+        <sys_id>b2362270db68030052ff76721f96191e</sys_id>
+        <sys_mod_count>688</sys_mod_count>
+        <sys_name>SLRP Application Form</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_b2362270db68030052ff76721f96191e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-04-04 14:40:56</sys_updated_on>
+        <template><![CDATA[<div>
+  <form name="questionnaireForm" ng-if="loaded">
+    <div class="panel">
+      <div class="panel-heading panel-default">
+        <ul class="nav nav-pills">
+          <li ng-repeat="question in data.questions" 
+              class="{{pillStyle($index)}}">
+            <a ng-click="setCurrent($index)" 
+               data-target="#question-{{$index}}-tab" 
+               data-toggle="{{$index <= data.maxIndex ? 'pill' : ''}}" 
+               title="{{question.title}}" 
+               ng-disabled="isDisabled($index)" 
+               class="badge">{{$index + 1}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <div class="tab-content">
+          <div ng-repeat="question in c.data.questions" class="tab-pane fade in {{isActive($index) ? 'active' : ''}}" id="question-{{$index}}-tab">
+            <div 
+                 ng-show="isDisqualified($index)" 
+                 class="alert alert-danger fade {{isDisqualified($index) ? 'in' : 'out'}}">
+              Your answer to this question indicates that you do not
+            	qualify for the SLRP incentive. If your answer was made in error
+              you may modify your answer now.
+            </div>
+            <div ng-show="question.guidance" class="alert alert-warning" ng-bind-html="question.guidance"></div>
+            {{$index + 1}}. <span ng-bind-html="question.text"></span>
+            <div class="radio">
+              <label>
+                <input type="radio"
+                       ng-model="data.answers[$index + 0].value"
+                       ng-disabled="application.certified"
+                       value="yes">
+                Yes
+              </label>
+            </div>
+            <div ng-show="widgetEnabled($index, 'yes')" class="fade {{data.answers[$index + 0].value == 'yes' ? 'in' : 'out'}}">
+              <div class="panel panel-default" ng-if="widgetEnabled($index, 'yes')">
+                <div class="panel-body">
+            			<sp-widget widget="question.yes_widget"></sp-widget>
+                </div>
+              </div>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" 
+                       ng-model="data.answers[$index + 0].value"
+                       ng-disabled="application.certified"
+                       value="no">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <button ng-click="exit()" class="btn btn-primary">{{application.certified ? '' : 'Save / '}} Exit</button>
+          </div>
+          <div class="col-md-6 text-right">
+            <button ng-click="back()" class="btn btn-warning" ng-disabled="onFirst()">Back</button>
+            <button ng-click="next()" class="btn {{isDisqualified() ? 'btn-danger' : 'btn-success'}}" ng-disabled="!canContinue() || saving">{{isDisqualified() ? 'End' :  (onLast() ? 'Finish' : 'Next')}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>]]></template>
+    </sp_widget>
+</record_update>

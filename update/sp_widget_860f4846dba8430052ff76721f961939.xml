@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope, $scope, $location) {
+  /* widget controller */
+  var c = this;
+	
+	var applySettings = function(data) {
+		$scope.application = data.application;
+		$scope.gemsProfile = data.gemsProfile;
+	}
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	}
+	$scope.$on('slrp_application_loaded', function(event, data) {
+		applySettings($rootScope);
+	});
+	
+	$scope.confirm = function($event) {
+		c.server.get({
+			application: $scope.application
+		}).then(function(response) {
+			if (response.data.application) {
+				$scope.$emit('application_updated');
+				$location.url('?id=slrp_application');
+			}
+		});
+	};
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slrp_contact_information</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - Contact Information</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	if (input && input.application && input.application.alternate_email_addresses) {
+		var application = new GlideRecord('x_sl_application');
+		if (application.get(input.application.sys_id)) {
+			application.setValue('alternate_email_addresses', input.application.alternate_email_addresses);
+			application.setValue('contact_information_confirmed', true);
+			application.update();
+			data.application = application;
+		} else {
+			gs.addErrorMessage('Error retrieiving your most recent application.');
+		}
+	}
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-14 04:58:45</sys_created_on>
+        <sys_id>860f4846dba8430052ff76721f961939</sys_id>
+        <sys_mod_count>118</sys_mod_count>
+        <sys_name>SLRP - Contact Information</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_860f4846dba8430052ff76721f961939</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-24 15:47:29</sys_updated_on>
+        <template><![CDATA[<form name="contact_form">
+<div class="panel panel-info">
+  <div class="panel-heading">
+    Confirm Contact Information
+  </div>
+  <div class="panel-body">
+    <p>
+      The primary e-mail address is the mail address associated
+      with the HR Online account and originally found in the Department
+      of State Global Address List (GAL). If you find that this address
+      is incorrect/no longer valid, you should contact the IT Service Center
+      and ask that it be updated to the correct address.
+    </p>
+    <p>
+      When message are sent through the system addressed to the primary
+      address, copies will also be distributed ot the addresses included in the
+      alternate address field.
+    </p>
+    <div class="form-group">
+      <label class="col-sm-3 control-label"><strong>Primary Email Address:</strong></label>
+      <div class="col-sm-9">
+        <p class="form-control-static">{{gemsProfile ? gemsProfile.email : ''}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="alternative_email_addresses" class="col-sm-3 control-label"><strong>Alternate Email Address(es):</strong></label>
+      <div class="col-sm-9">
+        <input type="email" 
+               ng-required="true"
+               class="form-control" 
+               placeholder="e.g., email@domain.com"
+               ng-model="application.alternate_email_addresses" />
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer text-right">
+    <a ng-href="?id=slrp_dashboard" class="btn btn-danger">Cancel</a><button ng-click="confirm($event)" class="btn btn-success" ng-disabled="contact_form.$invalid">Confirm and Continue</button>
+  </div>
+</div>
+</form>]]></template>
+    </sp_widget>
+</record_update>

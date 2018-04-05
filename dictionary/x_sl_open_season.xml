@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Open Season" max_length="40" name="x_sl_open_season" type="collection">
+        <element label="Is Active" max_length="40" name="active" type="boolean"/>
+        <element label="Begin Date" max_length="40" name="begin_date" type="glide_date"/>
+        <element label="End Date" max_length="40" name="end_date" type="glide_date"/>
+        <element label="Max Lifetime Payment" max_length="40" name="max_lifetime_payment" type="integer"/>
+        <element label="Max Yearly Payment" max_length="40" name="max_yearly_payment" type="integer"/>
+        <element label="Minimum Loan" max_length="40" name="min_loan_balance" type="integer"/>
+        <element label="Post Qualification" max_length="40" name="post_qualification" type="string"/>
+        <element choice="3" default="Open" label="Status" mandatory="true" max_length="40" name="status" type="string">
+            <choice>
+                <element label="Open" sequence="0" value="Open"/>
+                <element label="Closed" sequence="1" value="Closed"/>
+            </choice>
+        </element>
+        <element choice="3" default="SLRP" label="Type" max_length="40" name="type" type="choice">
+            <choice>
+                <element label="CFP" value="CFP"/>
+                <element label="SLRP" value="SLRP"/>
+            </choice>
+        </element>
+        <element display="true" label="Year" max_length="4" name="year" type="string"/>
+    </element>
+</database>

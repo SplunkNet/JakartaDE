@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>a9ba40aa1d480300f28f729badefa874</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="x_slrp_qualifying_occupational_series">
+    <x_slrp_qualifying_occupational_series action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <number>QUA120</number>
+        <occ_code>01040</occ_code>
+        <qos_create_id>1</qos_create_id>
+        <qos_qualification_ind>Y</qos_qualification_ind>
+        <qos_update_id>67238</qos_update_id>
+        <sys_class_name>x_slrp_qualifying_occupational_series</sys_class_name>
+        <sys_created_by>michael.ferrari</sys_created_by>
+        <sys_created_on>2017-07-21 21:25:27</sys_created_on>
+        <sys_id>a9ba40aa1d480300f28f729badefa874</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>michael.ferrari</sys_updated_by>
+        <sys_updated_on>2017-07-21 21:25:27</sys_updated_on>
+    </x_slrp_qualifying_occupational_series>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>cmayfield@KPMG.com</sys_created_by>
+        <sys_created_on>2017-08-23 17:48:28</sys_created_on>
+        <sys_id>bc8591c1dbf0030052ff76721f96191e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>01040</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sys_metadata_link_bc8591c1dbf0030052ff76721f96191e</sys_update_name>
+        <sys_updated_by>cmayfield@KPMG.com</sys_updated_by>
+        <sys_updated_on>2017-08-23 17:48:28</sys_updated_on>
+        <tablename>x_slrp_qualifying_occupational_series</tablename>
+    </sys_metadata_link>
+</record_update>

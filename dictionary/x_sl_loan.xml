@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Loan" max_length="40" name="x_sl_loan" type="collection">
+        <element label="Application" mandatory="true" max_length="32" name="application" reference="x_sl_application" type="reference"/>
+        <element label="Balance Date" max_length="40" name="balance_date" type="glide_date"/>
+        <element label="Lender" mandatory="true" max_length="32" name="lender" reference="x_sl_lender" type="reference"/>
+        <element label="Number" max_length="40" name="number" type="integer"/>
+        <element label="Outstanding Balance" max_length="40" name="outstanding_balance" type="integer"/>
+        <index name="index">
+            <element name="lender"/>
+        </index>
+        <index name="index2">
+            <element name="application"/>
+        </index>
+    </element>
+</database>

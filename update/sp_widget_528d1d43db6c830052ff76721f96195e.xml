@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($rootScope, $scope) {
+  /* widget controller */
+  var c = this;
+	
+	var applySettings = function(data) {
+		$scope.application = data.application;
+		$scope.gemsProfile = data.gemsProfile;
+		
+		c.server.get({
+			application: $scope.application
+		}).then(function(response) {
+			c.data = response.data;
+			$scope.loaded = $rootScope.loaded;
+			$scope.getPercentComplete();
+		});
+
+	}
+	
+	if ($rootScope.loaded) {
+		applySettings($rootScope);
+	}
+	
+	$scope.$on('slrp_application_loaded', function(event, data) {
+		applySettings($rootScope);
+	});
+	
+	$scope.applicationStatus = function() {
+		return $scope.application ? $scope.application.status : 'Not Started';
+	}
+	
+	$scope.isSubmitted = function() {
+		return $scope.getApplicationStatus() === 'Submitted';
+	}
+	
+	$scope.isDisqualified = function() {
+		return false;
+	}
+	
+	$scope.getPercentComplete = function() {
+		var totalTasks = 0;
+		var totalCompleted = 0;
+		
+		c.data.checklist.forEach(function(task) {
+			totalTasks++;
+			if (task.completed) {
+				totalCompleted++;
+			}
+		});
+		return Math.ceil(totalCompleted / totalTasks * 100);
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.list-group-item {
+  i {
+    float: right;
+    font-size: 1.5em;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slrp_application_status</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - Application Status</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	if (input) {
+		if (input.application) {
+			loadQuestions(input.application, data);
+		}
+		generateChecklist(data);
+	}
+})();
+
+function loadQuestions(application, data) {
+	var gr = new GlideRecord('x_sl_answer');
+	gr.addQuery('application', application.sys_id);
+	gr.orderBy('question.number');
+	gr.query();
+
+	data.application = application;
+	data.answers = {};
+	var question;
+	data.questions = [];
+	var i = 0;
+	
+	while (gr.next()) {
+		question = mapQuestion(gr.question);
+		data.answers[i] = {
+			sys_id: gr.sys_id.toString(),
+			value: gr.value.toString().trim(),
+			disqualified: gr.disqualified.toString() == 'true'
+		}
+		
+		data.answers[i].answered = data.answers[i].value != '';
+		
+		if (data.current_index == null || (gr.value != null && gr.value.toString().trim() != '')) {
+			data.current_index = i;
+		}
+
+		data.questions.push(question);
+		i++;
+	}
+}
+
+function mapQuestion(gr) {
+	var question = {
+		sys_id: gr.sys_id.toString(),
+		title: gr.title.toString(),
+		text: gr.text.toString(), 
+		guidance: gr.guidance.toString(),
+		number: parseInt(gr.number),
+		yes_action: gr.yes_action.toString(),
+		no_action: gr.no_action.toString()
+	}
+	return question;
+}
+
+function generateChecklist(data) {
+	var application = data.application || {};
+	
+	var checklist = [];
+	
+	checklist.push({
+		task: 'Privacy Policy',
+		completed: application.privacy_policy_seen == 'true',
+		style: application.privacy_policy_seen == 'true' ? 'success' : 'default'
+	})
+	
+	checklist.push({
+		task: 'Contact Information',
+		completed: application.contact_information_confirmed == 'true',
+		style: application.contact_information_confirmed ? 'success' : 'default'
+	})
+	
+	var totalQuestions = 0;
+	var totalAnswered = 0;
+	var disqualified = false;
+	for (var key in data.answers) {
+		totalQuestions++;
+		if (data.answers[key].answered) {
+			totalAnswered++;
+		}
+		if (data.answers[key].disqualified) {
+			disqualified = true;
+		}
+	}
+	
+	checklist.push({
+		task: 'Questionnaire' + (totalQuestions > 0 ? ' (' + totalAnswered + ' of ' + totalQuestions + ')' : ''),
+		completed: totalAnswered > 0 && totalAnswered == totalQuestions,
+		disqualified: disqualified
+	})
+	
+	checklist.push({
+		task: 'Certified Questionnaire',
+		completed: application.certified
+	})
+	
+	checklist.push({
+		task: 'Loan Documents',
+		completed: false
+	})
+	
+	checklist.push({
+		task: 'Service Agreement',
+		completed: application.service_agreement_agreed == 'true'
+	})
+	
+	data.checklist = checklist;
+}]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-17 13:15:40</sys_created_on>
+        <sys_id>528d1d43db6c830052ff76721f96195e</sys_id>
+        <sys_mod_count>129</sys_mod_count>
+        <sys_name>SLRP - Application Status</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_528d1d43db6c830052ff76721f96195e</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-24 14:59:09</sys_updated_on>
+        <template><![CDATA[<div ng-if="loaded" class="panel panel-primary">
+  <div class="panel-heading">
+		Application Summary
+	</div>
+	<div class="panel-body">
+    <div class="row">
+      <label class="col-sm-2"><b>Status: </b></label>
+      <span class="col-sm-10">{{applicationStatus()}}</span>
+    </div>
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-2">
+        <div class="progress">
+          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{getPercentComplete()}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width:{{getPercentComplete()}}%">
+            {{getPercentComplete()}} %
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <ul class="list-group">
+          <li ng-repeat="item in data.checklist" class="list-group-item">
+            <i class="fa {{item.disqualified ? 'fa-times-circle text-danger' : 'fa-check-circle'}} {{!item.disqualified && item.completed ? 'text-success' : 'text-default'}}"></i>
+            {{item.task}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

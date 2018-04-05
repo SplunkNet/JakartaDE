@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="Legacy - Lender" max_length="40" name="x_sl_l_lender" type="collection">
+        <element attributes="import_attribute_name=LNDR_ABA_ROUTING_NUM_TEXT,edge_encryption_enabled=true" label="LNDR_ABA_ROUTING_NUM_TEXT" max_length="40" name="u_lndr_aba_routing_num_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_ACCT_NUM_TEXT,edge_encryption_enabled=true" label="LNDR_ACCT_NUM_TEXT" max_length="40" name="u_lndr_acct_num_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_ACTIVE_IND,edge_encryption_enabled=true" label="LNDR_ACTIVE_IND" max_length="40" name="u_lndr_active_ind" type="string"/>
+        <element attributes="import_attribute_name=LNDR_ALT_PHONE_NUM_TEXT,edge_encryption_enabled=true" label="LNDR_ALT_PHONE_NUM_TEXT" max_length="40" name="u_lndr_alt_phone_num_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_CODE,edge_encryption_enabled=true" label="LNDR_CODE" max_length="40" name="u_lndr_code" type="string"/>
+        <element attributes="import_attribute_name=LNDR_CREATE_DATE,edge_encryption_enabled=true" label="LNDR_CREATE_DATE" max_length="40" name="u_lndr_create_date" type="string"/>
+        <element attributes="import_attribute_name=LNDR_CREATE_ID,edge_encryption_enabled=true" label="LNDR_CREATE_ID" max_length="40" name="u_lndr_create_id" type="string"/>
+        <element attributes="import_attribute_name=LNDR_EFT_ALLOWED_IND,edge_encryption_enabled=true" label="LNDR_EFT_ALLOWED_IND" max_length="40" name="u_lndr_eft_allowed_ind" type="string"/>
+        <element attributes="import_attribute_name=LNDR_GROUP_SEQ_NUM,edge_encryption_enabled=true" label="LNDR_GROUP_SEQ_NUM" max_length="40" name="u_lndr_group_seq_num" type="string"/>
+        <element attributes="import_attribute_name=LNDR_NAME_TEXT,edge_encryption_enabled=true" label="LNDR_NAME_TEXT" max_length="62" name="u_lndr_name_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_NOTE_TEXT,edge_encryption_enabled=true" label="LNDR_NOTE_TEXT" max_length="251" name="u_lndr_note_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PAYMENT_INSTRUCTION_TEXT,edge_encryption_enabled=true" label="LNDR_PAYMENT_INSTRUCTION_TEXT" max_length="218" name="u_lndr_payment_struction_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PAYMNT_ADRS1_TEXT,edge_encryption_enabled=true" label="LNDR_PAYMNT_ADRS1_TEXT" max_length="47" name="u_lndr_paymnt_adrs1_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PAYMNT_ADRS2_TEXT,edge_encryption_enabled=true" label="LNDR_PAYMNT_ADRS2_TEXT" max_length="58" name="u_lndr_paymnt_adrs2_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PAYMNT_CITY_TEXT,edge_encryption_enabled=true" label="LNDR_PAYMNT_CITY_TEXT" max_length="40" name="u_lndr_paymnt_city_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PAYMNT_STATE_CODE,edge_encryption_enabled=true" label="LNDR_PAYMNT_STATE_CODE" max_length="40" name="u_lndr_paymnt_state_code" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PAYMNT_ZIP_CODE_TEXT,edge_encryption_enabled=true" label="LNDR_PAYMNT_ZIP_CODE_TEXT" max_length="40" name="u_lndr_paymnt_zip_code_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_PHONE_NUM_TEXT,edge_encryption_enabled=true" label="LNDR_PHONE_NUM_TEXT" max_length="40" name="u_lndr_phone_num_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_POC_EMAIL_ADDRESS_TEXT,edge_encryption_enabled=true" label="LNDR_POC_EMAIL_ADDRESS_TEXT" max_length="40" name="u_lndr_poc_email_address_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_POC_NAME,edge_encryption_enabled=true" label="LNDR_POC_NAME" max_length="40" name="u_lndr_poc_name" type="string"/>
+        <element attributes="import_attribute_name=LNDR_POC_PHONE_NUM_TEXT,edge_encryption_enabled=true" label="LNDR_POC_PHONE_NUM_TEXT" max_length="40" name="u_lndr_poc_phone_num_text" type="string"/>
+        <element attributes="import_attribute_name=LNDR_SEQ_NUM,edge_encryption_enabled=true" label="LNDR_SEQ_NUM" max_length="40" name="u_lndr_seq_num" type="string"/>
+        <element attributes="import_attribute_name=LNDR_UPDATE_DATE,edge_encryption_enabled=true" label="LNDR_UPDATE_DATE" max_length="40" name="u_lndr_update_date" type="string"/>
+        <element attributes="import_attribute_name=LNDR_UPDATE_ID,edge_encryption_enabled=true" label="LNDR_UPDATE_ID" max_length="40" name="u_lndr_update_id" type="string"/>
+        <element attributes="import_attribute_name=LNDR_WEB_ADDRESS_TEXT,edge_encryption_enabled=true" label="LNDR_WEB_ADDRESS_TEXT" max_length="60" name="u_lndr_web_address_text" type="string"/>
+    </element>
+</database>

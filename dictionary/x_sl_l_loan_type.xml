@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="Legacy - Loan Type" max_length="40" name="x_sl_l_loan_type" type="collection">
+        <element attributes="import_attribute_name=LT_ACTIVE_IND,edge_encryption_enabled=true" label="LT_ACTIVE_IND" max_length="40" name="u_lt_active_ind" type="string"/>
+        <element attributes="import_attribute_name=LT_CODE,edge_encryption_enabled=true" label="LT_CODE" max_length="40" name="u_lt_code" type="string"/>
+        <element attributes="import_attribute_name=LT_CREATE_DATE,edge_encryption_enabled=true" label="LT_CREATE_DATE" max_length="40" name="u_lt_create_date" type="string"/>
+        <element attributes="import_attribute_name=LT_CREATE_ID,edge_encryption_enabled=true" label="LT_CREATE_ID" max_length="40" name="u_lt_create_id" type="string"/>
+        <element attributes="import_attribute_name=LT_DESC,edge_encryption_enabled=true" label="LT_DESC" max_length="72" name="u_lt_desc" type="string"/>
+        <element attributes="import_attribute_name=LT_QUALIFICATION_IND,edge_encryption_enabled=true" label="LT_QUALIFICATION_IND" max_length="40" name="u_lt_qualification_ind" type="string"/>
+        <element attributes="import_attribute_name=LT_SEQ_NUM,edge_encryption_enabled=true" label="LT_SEQ_NUM" max_length="40" name="u_lt_seq_num" type="string"/>
+        <element attributes="import_attribute_name=LT_UPDATE_DATE,edge_encryption_enabled=true" label="LT_UPDATE_DATE" max_length="40" name="u_lt_update_date" type="string"/>
+        <element attributes="import_attribute_name=LT_UPDATE_ID,edge_encryption_enabled=true" label="LT_UPDATE_ID" max_length="40" name="u_lt_update_id" type="string"/>
+    </element>
+</database>

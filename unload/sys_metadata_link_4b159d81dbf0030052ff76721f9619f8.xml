@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>5ee3e3121d480300f28f729badefa81e</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="x_slrp_eligible_dos_tenure">
+    <x_slrp_eligible_dos_tenure action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <edt_desc>CAREER SEASONAL PPT</edt_desc>
+        <edt_eligible_ind>Y</edt_eligible_ind>
+        <edt_note_text/>
+        <number>ELI21</number>
+        <sys_class_name>x_slrp_eligible_dos_tenure</sys_class_name>
+        <sys_created_by>michael.ferrari</sys_created_by>
+        <sys_created_on>2017-07-21 18:35:55</sys_created_on>
+        <sys_id>5ee3e3121d480300f28f729badefa81e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>michael.ferrari</sys_updated_by>
+        <sys_updated_on>2017-07-21 18:35:55</sys_updated_on>
+    </x_slrp_eligible_dos_tenure>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>cmayfield@KPMG.com</sys_created_by>
+        <sys_created_on>2017-08-23 17:46:43</sys_created_on>
+        <sys_id>4b159d81dbf0030052ff76721f9619f8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ELI21</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sys_metadata_link_4b159d81dbf0030052ff76721f9619f8</sys_update_name>
+        <sys_updated_by>cmayfield@KPMG.com</sys_updated_by>
+        <sys_updated_on>2017-08-23 17:46:43</sys_updated_on>
+        <tablename>x_slrp_eligible_dos_tenure</tablename>
+    </sys_metadata_link>
+</record_update>

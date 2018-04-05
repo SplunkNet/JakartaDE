@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="eft_allowed" label="EFT Allowed" language="en" table="x_sl_lender">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>eft_allowed</element>
+            <help/>
+            <hint/>
+            <label>EFT Allowed</label>
+            <language>en</language>
+            <name>x_sl_lender</name>
+            <plural>EFT Allowed</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>alex.duan</sys_created_by>
+            <sys_created_on>2017-08-22 02:32:48</sys_created_on>
+            <sys_id>0e5a3c28db74070052ff76721f961979</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>EFT Allowed</sys_name>
+            <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+            <sys_update_name>sys_documentation_x_sl_lender_eft_allowed_en</sys_update_name>
+            <sys_updated_by>alex.duan</sys_updated_by>
+            <sys_updated_on>2017-08-22 02:32:48</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

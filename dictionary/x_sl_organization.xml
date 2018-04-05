@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Organization" max_length="40" name="x_sl_organization" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Code" max_length="40" name="code" type="string"/>
+        <element label="Eligible Shift Work" max_length="40" name="eligible_shift_work" type="boolean"/>
+        <element display="true" label="Number" max_length="40" name="number" type="integer"/>
+        <element label="Qualified" max_length="40" name="qualified" type="boolean"/>
+    </element>
+</database>

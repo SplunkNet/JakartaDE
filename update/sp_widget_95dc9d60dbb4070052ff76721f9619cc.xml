@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	
+	c.answer = $scope.$parent.data.answers[c.options.index];
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>slrp_occupational_series_yes_widget</id>
+        <internal>false</internal>
+        <link/>
+        <name>SLRP - Occupational Series Yes Widget</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	var gr = new GlideRecord('x_sl_occupational_series');
+	gr.addQuery('active', true);
+	gr.addQuery('qualified', true);
+	gr.orderBy('code');
+	gr.query();
+	
+	data.occupationalSeries = [];
+	while (gr.next()) {
+		data.occupationalSeries.push({
+			number: Number(gr.number),
+			code: gr.code.toString(),
+			description: gr.description.toString()
+		});
+	}
+	
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>alex.duan</sys_created_by>
+        <sys_created_on>2017-08-22 05:03:29</sys_created_on>
+        <sys_id>95dc9d60dbb4070052ff76721f9619cc</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>SLRP - Occupational Series Yes Widget</sys_name>
+        <sys_package display_value="Student Loan Repayment Program" source="x_sl">95e2c16cdba0030052ff76721f9619ed</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Student Loan Repayment Program">95e2c16cdba0030052ff76721f9619ed</sys_scope>
+        <sys_update_name>sp_widget_95dc9d60dbb4070052ff76721f9619cc</sys_update_name>
+        <sys_updated_by>alex.duan</sys_updated_by>
+        <sys_updated_on>2017-08-24 16:22:42</sys_updated_on>
+        <template><![CDATA[<ng-form>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Occupation Series:</label>
+      <div class="col-sm-6">
+        <select class="form-control" ng-model="c.answer.data.occupationalSeries" ng-disabled="c.options.readOnly" ng-required="c.answer.value == 'yes'">
+          <option value="">Select One</option>
+          <option ng-repeat="os in c.data.occupationalSeries" value="{{os.code}}">GS-{{os.code}}, {{os.description}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</ng-form>]]></template>
+    </sp_widget>
+</record_update>

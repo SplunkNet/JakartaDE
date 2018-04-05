@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element extends="sys_import_set_row" label="Legacy - Qualifying Occupational Series" max_length="40" name="x_sl_l_qualifying_occupational_series" type="collection">
+        <element attributes="import_attribute_name=OCC_CODE,edge_encryption_enabled=true" label="OCC_CODE" max_length="40" name="u_occ_code" type="string"/>
+        <element attributes="import_attribute_name=QOS_CREATE_DATE,edge_encryption_enabled=true" label="QOS_CREATE_DATE" max_length="40" name="u_qos_create_date" type="string"/>
+        <element attributes="import_attribute_name=QOS_CREATE_ID,edge_encryption_enabled=true" label="QOS_CREATE_ID" max_length="40" name="u_qos_create_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="QOS_DESCRIPTION_TEXT" max_length="255" name="u_qos_description_text" type="string"/>
+        <element attributes="import_attribute_name=QOS_QUALIFICATION_IND,edge_encryption_enabled=true" label="QOS_QUALIFICATION_IND" max_length="40" name="u_qos_qualification_ind" type="string"/>
+        <element attributes="import_attribute_name=QOS_SEQ_NUM,edge_encryption_enabled=true" label="QOS_SEQ_NUM" max_length="40" name="u_qos_seq_num" type="string"/>
+        <element attributes="import_attribute_name=QOS_UPDATE_DATE,edge_encryption_enabled=true" label="QOS_UPDATE_DATE" max_length="40" name="u_qos_update_date" type="string"/>
+        <element attributes="import_attribute_name=QOS_UPDATE_ID,edge_encryption_enabled=true" label="QOS_UPDATE_ID" max_length="40" name="u_qos_update_id" type="string"/>
+        <element attributes="import_attribute_name=RRF_SEQ_NUM,edge_encryption_enabled=true" label="RRF_SEQ_NUM" max_length="40" name="u_rrf_seq_num" type="string"/>
+    </element>
+</database>
